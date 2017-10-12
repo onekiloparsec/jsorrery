@@ -1,10 +1,10 @@
 {
 	"extends": "airbnb",
 	"parser": "babel-eslint",
-	env: {
+	"env": {
 		"browser": true,
 	},
-	rules: {
+	"rules": {
 		"strict": [2, "global"],
 		"space-before-function-paren": [2, "never"],
 		"indent": [2, "tab"],
