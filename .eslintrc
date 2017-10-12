@@ -42,8 +42,5 @@
 			"objects": "only-multiline",
 			"functions": "never"
 		}]
-	},
-	"ecmaFeatures" : {
-		"experimentalObjectRestSpread":true
 	}
 }
