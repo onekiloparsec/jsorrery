@@ -38,7 +38,7 @@ module.exports = {
 		}),
 		new ExtractTextPlugin('bundle.css'),
 		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoErrorsPlugin(),
+		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.ProvidePlugin({
 			jQuery: 'jquery',
 		}),
