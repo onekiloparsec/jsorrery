@@ -1,10 +1,19 @@
 
-import { Object3D, MeshPhongMaterial, Mesh, SphereGeometry, MeshLambertMaterial, DoubleSide, Euler, Quaternion } from 'three';
+import {
+	DoubleSide,
+	Euler,
+	Mesh,
+	MeshLambertMaterial,
+	MeshPhongMaterial,
+	Object3D,
+	Quaternion,
+	SphereGeometry
+} from 'three';
 import RingGeometry2 from '../three/RingGeometry2';
 import Labels from '../graphics2d/Labels';
 import ResourceLoader from '../loaders/ResourceLoader';
 import Dimensions from './Dimensions';
-import { KM, DEG_TO_RAD, QUARTER_CIRCLE } from '../constants';
+import { DEG_TO_RAD, KM, QUARTER_CIRCLE } from '../constants';
 
 
 export default class Body3D {
@@ -42,7 +51,7 @@ export default class Body3D {
 	}
 
 	setDisplayObject() {
-		const map = this.celestial.map;
+		const { map } = this.celestial.map;
 		const matOptions = {};
 		let onMaterialReady;
 		if (map) {
@@ -75,7 +84,7 @@ export default class Body3D {
 					Dimensions.getScaled(this.celestial.ring.innerRadius * KM),
 					Dimensions.getScaled(this.celestial.ring.outerRadius * KM),
 				];
-				
+
 				const ringMaterial = new MeshLambertMaterial({
 					map: ringMap,
 					transparent: true,
@@ -90,9 +99,9 @@ export default class Body3D {
 				ring.rotation.x = -Math.PI / 2;
 				this.planet.add(ring);
 			});
-			
+
 		}
-		
+
 		this.planet.rotation.copy(this.celestial.getTilt(QUARTER_CIRCLE));
 
 		this.root.add(this.planet);
@@ -114,7 +123,7 @@ export default class Body3D {
 	}
 
 	addCamera(name, camera) {
-		
+
 		this.root.add(camera);
 		this.cameras = this.cameras || {};
 		this.cameras[name] = camera;
@@ -124,7 +133,7 @@ export default class Body3D {
 		// console.log(name);
 		return this.cameras && this.cameras[name];
 	}
-	
+
 	draw() {
 		const pos = this.getPosition();
 		// if (this.celestial.name === 'moon') console.log(pos, this.celestial.name);

@@ -1,9 +1,6 @@
 
-
 import $ from 'jquery';
-import { Scene, WebGLRenderer, AmbientLight } from 'three';
-import { Stats } from '../utils/ThreeExamples';// eslint-disable-line
-
+import { AmbientLight, Scene, WebGLRenderer } from 'three';
 import Body3D from './Body3d';
 import MilkyWay from './MilkyWayParticles';
 import CameraManager from './CameraManager';
@@ -15,8 +12,8 @@ import Screenshot from './Screenshot';
 import { ExternalSun } from './Sun';
 import Labels from '../graphics2d/Labels';
 import Gui, { PLANET_SCALE_ID } from '../gui/Gui';
-import { IS_CAPTURE, DEG_TO_RAD, KM } from '../constants';
-		
+import { DEG_TO_RAD, IS_CAPTURE, KM } from '../constants';
+
 let stats;
 let renderer;
 
@@ -48,7 +45,8 @@ export default {
 		renderer.setPixelRatio(window.devicePixelRatio);
 
 		const light = new AmbientLight(0x202020);
-		this.root.add(light);/**/
+		this.root.add(light);
+		/**/
 
 		if (!stats) {
 			// stats = new Stats();
@@ -59,9 +57,13 @@ export default {
 		}
 
 		this.container.append(renderer.domElement);
-		
+
 		//planet scale
-		Gui.addSlider(PLANET_SCALE_ID, { min: 1, max: 100, initial: (scenario.forcedGuiSettings && scenario.forcedGuiSettings.scale) || 10 }, val => {
+		Gui.addSlider(PLANET_SCALE_ID, {
+			min: 1,
+			max: 100,
+			initial: (scenario.forcedGuiSettings && scenario.forcedGuiSettings.scale) || 10
+		}, val => {
 			this.bodies3d.forEach(body3d => {
 				body3d.setScale(val);
 			});
@@ -153,7 +155,7 @@ export default {
 		if (celestialBody.createCustomDisplayObject) {
 			body3d = celestialBody.createCustomDisplayObject();
 		} else {
-			body3d = new Body3D(celestialBody);		
+			body3d = new Body3D(celestialBody);
 		}
 
 		this.bodies3d.push(body3d);
@@ -161,7 +163,7 @@ export default {
 
 		OrbitLinesManager.addBody(body3d);
 		TracerManager.addBody(body3d);
-		CameraManager.addBody(body3d);		
+		CameraManager.addBody(body3d);
 	},
 
 	getRoot() {
@@ -198,7 +200,7 @@ export default {
 			this.sun = new ExternalSun(centralBody, this.universe);
 			this.root.add(this.sun.getDisplayObject());
 		}
-	
+
 
 	},
 

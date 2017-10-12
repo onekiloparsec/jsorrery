@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "lint": "eslint src"
+    "lint": "eslint src --fix"
   },
   "version": "1.0.0",
   "homepage": "http://la-grange.ca",

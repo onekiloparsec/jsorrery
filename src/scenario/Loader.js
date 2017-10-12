@@ -40,6 +40,7 @@ export function buildScenario(scenario) {
 }
 
 let built;
+
 function getAll() {
 	return built = built || all.map(buildScenario);
 }

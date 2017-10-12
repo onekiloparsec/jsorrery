@@ -27,7 +27,7 @@ function setup() {
 }
 
 export default {
-	
+
 	show() {
 		setup();
 
@@ -69,7 +69,7 @@ export default {
 			});
 
 		});
-		
+
 	},
 
 };

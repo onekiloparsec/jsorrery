@@ -1,8 +1,8 @@
-/** 
+/**
 
-Corrections have been added to element's altitude to compensate for imprecisions in parameters, so as to fit mechanical orbit to orbital elements.
+ Corrections have been added to element's altitude to compensate for imprecisions in parameters, so as to fit mechanical orbit to orbital elements.
 
-*/
+ */
 import { DAY } from '../../constants';
 import { earth } from './bodies/earth';
 import { Mercury7, Mercury8 } from './NasaNumbers';
@@ -136,8 +136,8 @@ export default {
 			},
 		},
 	},
-	
+
 	secondsPerTick: { min: 1, max: 10, initial: 5 },
-	help: "A selection of artificial satellites orbiting the Earth. They were not launched in the same years, so the epoch is irrelevent in this simulation. The numbers I have for these orbits are incomplete. The shape and inclination of the orbits are correct, but I don't have epoch and orientation information. I included this scenario to show the differences between these satellite's orbits shapes.",
+	help: 'A selection of artificial satellites orbiting the Earth. They were not launched in the same years, so the epoch is irrelevent in this simulation. The numbers I have for these orbits are incomplete. The shape and inclination of the orbits are correct, but I don\'t have epoch and orientation information. I included this scenario to show the differences between these satellite\'s orbits shapes.',
 
 };

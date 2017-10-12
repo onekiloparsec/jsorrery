@@ -1,5 +1,5 @@
-import { Vector3, Euler, Mesh, SphereGeometry, MeshPhongMaterial } from 'three';
-import { DEG_TO_RAD, CIRCLE } from '../constants';
+import { Euler, Mesh, MeshPhongMaterial, SphereGeometry, Vector3 } from 'three';
+import { CIRCLE, DEG_TO_RAD } from '../constants';
 import { getJ2000SecondsFromJD } from '../utils/JD';
 import Gui from '../gui/Gui';
 
@@ -8,13 +8,13 @@ const debugPos = true;
 export default function GeoPos(body3d, target) {
 
 	//home sweet home
-	let lat = 46.8139;
-	let lng = -71.2080;
+	const lat = 46.8139;
+	const lng = -71.2080;
 	let lastLat;
 	let lastLng;
 	let lastTime;
 
-	const universe = body3d.celestial.universe;
+	const { universe } = body3d.celestial.universe;
 
 	let sphere;
 	if (debugPos) {
@@ -49,7 +49,7 @@ export default function GeoPos(body3d, target) {
 			0,
 			body3d.getPlanetSize(),
 			0
-		);	
+		);
 		pos.applyEuler(a);
 		pos.applyEuler(body3d.celestial.getTilt());
 		if (sphere) sphere.position.copy(pos.clone().multiplyScalar(1.01));
@@ -59,8 +59,8 @@ export default function GeoPos(body3d, target) {
 
 	this.activate = () => {
 		Gui.addGeoloc({ lat, lng }, val => {
-			lat = val.lat;
-			lng = val.lng;
+			this.lat = val.lat;
+			this.lng = val.lng;
 			this.update();
 		});
 		this.update();

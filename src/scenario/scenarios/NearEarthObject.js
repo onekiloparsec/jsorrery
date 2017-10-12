@@ -1,11 +1,11 @@
-/** 
+/**
 
-mass : kg
-dist : km
-apeed : km/s
-radius: km
+ mass : kg
+ dist : km
+ apeed : km/s
+ radius: km
 
-*/
+ */
 
 import Promise from 'bluebird';
 import $ from 'jquery';
@@ -28,9 +28,9 @@ const N_TO_SHOW = 10;
 const MIN_DIST = 0.1;
 
 function onLoadError(jqXHR, textStatus, errorThrown) {
-	alert('Error loading NEO definitions. See console.');// eslint-disable-line
-	console.log(textStatus, errorThrown);// eslint-disable-line
-	console.log(jqXHR);// eslint-disable-line
+	alert('Error loading NEO definitions. See console.')// eslint-disable-line
+	console.log(textStatus, errorThrown)// eslint-disable-line
+	console.log(jqXHR)// eslint-disable-line
 }
 
 function onListLoaded(res) {
@@ -55,11 +55,11 @@ function onListLoaded(res) {
 		// console.log(allLinks.length);
 		allLinks.length = allLinks.length > N_TO_SHOW ? N_TO_SHOW : allLinks.length;
 		// console.log(allLinks);
-		
+
 		const allLoaded = allLinks.map(loadNeo);
 		return Promise.all(allLoaded).then((allNeo) => {
 			// console.log(allNeo);
-			
+
 			return allNeo.reduce((neos, neo) => {
 				// console.log(neo);
 				neos[neo.name] = neo;
@@ -82,7 +82,7 @@ function loadNeo(neoData) {
 function onObjectLoaded(res) {
 	// console.log(res);
 	const { name, orbital_data } = res;
-	
+
 	return Object.assign({
 		name,
 		title: name,
@@ -109,7 +109,7 @@ const cnf = {
 	title: 'Near Earth Objects',
 	load: () => {
 		if (scenarioReady) return scenarioReady.promise();
-		
+
 		scenarioReady = $.ajax({
 			// url: 'http://mvezina.com/jsorrery/feed-2017-03-01',
 			url: 'https://mvezina.com/jsorrery/feed-' + (new Date(new Date().getTime() + 24 * 60 * 60 * 1000)).toISOString().substring(0, 10),
@@ -138,7 +138,7 @@ const cnf = {
 		mars,
 	],
 	secondsPerTick: { min: 60, max: 3600 * 5, initial: 3600 },
-	defaultGuiSettings: { 
+	defaultGuiSettings: {
 		planetScale: 1,
 	},
 	help: `This scenario shows the next ${N_TO_SHOW} passages closer than ${MIN_DIST} AU of near Earth objects from Nasa's Near Earth Object Project (<a href="http://neo.jpl.nasa.gov/" target="_blank">http://neo.jpl.nasa.gov/</a>.`,

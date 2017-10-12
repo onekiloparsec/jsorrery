@@ -1,10 +1,9 @@
+import { DAY, J2000 } from '../constants';
 
-import { J2000, DAY } from '../constants';
-
-const gregorianReform = new Date('1582-10-15T00:00:00.000Z');
+// const gregorianReform = new Date('1582-10-15T00:00:00.000Z');
 
 const UNIX_EPOCH_JULIAN_DATE = 2440587.5;
-const UNIX_EPOCH_JULIAN_DAY = 2440587;
+// const UNIX_EPOCH_JULIAN_DAY = 2440587;
 
 export function getJD(date) {
 	// const M = date.getUTCMonth() + 1;
@@ -20,7 +19,7 @@ export function getJD(date) {
 	// } else {
 	// 	jdn = d + Math.floor((153 * m + 2) / 5) + (365 * y) + Math.floor(y / 4) - 32083;
 	// }
-	
+
 	// const t = ((date.getUTCHours() - 12) / 24) + (date.getUTCMinutes() / 1440) + (date.getUTCSeconds() / 86400);
 	// return jdn + t;
 	return (((+date) / 1000) / DAY) + UNIX_EPOCH_JULIAN_DATE;
@@ -86,7 +85,7 @@ export function getDeltaT(date) {
 	} else if (y >= 1860 && y < 1900) {
 		const u = y - 1860;
 		dt = 7.62 + 0.5737 * u - 0.251754 * (u ** 2) + 0.01680668 * (u ** 3) - 0.0004473624 * (u ** 4) + (u ** 5) / 233174;
-	} else if (y >= -500 && y < 500) { 
+	} else if (y >= -500 && y < 500) {
 		const u = y / 100;
 		dt = 10583.6 - 1014.41 * u + 33.78311 * (u ** 2) - 5.952053 * (u ** 3) - 0.1798452 * (u ** 4) + 0.022174192 * (u ** 5) + 0.0090316521 * (u ** 6);
 	}

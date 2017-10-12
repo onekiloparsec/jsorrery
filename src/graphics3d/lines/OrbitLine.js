@@ -1,10 +1,9 @@
 
-
-import { LineBasicMaterial, BufferGeometry, Geometry, Line, BufferAttribute, VertexColors } from 'three';
+import { BufferAttribute, BufferGeometry, Geometry, Line, LineBasicMaterial, VertexColors } from 'three';
 import Dimensions from '../Dimensions';
 import DebugPoint from '../utils/DebugPoint';
 import { darken, hexToRgb, rgbToHex } from '../../utils/ColorUtils';
-import { IS_SCREENSHOT, IS_CAPTURE, QUARTER_CIRCLE } from '../../constants';
+import { IS_CAPTURE, IS_SCREENSHOT, QUARTER_CIRCLE } from '../../constants';
 
 
 export default {
@@ -43,20 +42,20 @@ export default {
 		pos[nNumbers] = this.orbitVertices[0].x;
 		pos[nNumbers + 1] = this.orbitVertices[0].y;
 		pos[nNumbers + 2] = this.orbitVertices[0].z;
-		
+
 
 		const origColor = hexToRgb(this.color);
 		const colors = orbitVertices.map((v, i) => {
 			// return origColor;
 			return darken(origColor, 1 - i / l);
 		}).reduce((a, c, i) => {
-			const n = i * 3;			
+			const n = i * 3;
 			a[n] = c.r / 255;
 			a[n + 1] = c.g / 255;
 			a[n + 2] = c.b / 255;
 			return a;
 		}, new Float32Array(3 + nNumbers));
-		
+
 		colors[nNumbers] = origColor.r / 255;
 		colors[nNumbers + 1] = origColor.g / 255;
 		colors[nNumbers + 2] = origColor.b / 255;
@@ -67,7 +66,7 @@ export default {
 		const orbitGeom = this.geometry = new BufferGeometry();
 
 		orbitGeom.addAttribute('position', new BufferAttribute(pos, 3));
-		
+
 		orbitGeom.addAttribute('color', new BufferAttribute(colors, 3));
 
 		return new Line(orbitGeom, material);
@@ -96,7 +95,7 @@ export default {
 
 		const numberBehind = this.getNVerticesBehindPos(pos, vel);
 		this.geometry.attributes.position.needsUpdate = true;
-		
+
 		if (numberBehind) {
 			// console.log(numberBehind);
 			//if orbit is heavily perturbed, we'll have a callback to gen new orbit vertices when we delete some
@@ -120,14 +119,14 @@ export default {
 				// DebugPoint.add(newVertex, 0xffffaa);
 				sorted[this.nVertices - 1] = newVertex;
 			}
-		
+
 			this.orbitVertices = sorted;
 			this.buildPositions();
 
 			// this.showAllVertices();
 			// DebugPoint.add(sorted[this.nVertices - (numberBehind + 1)], 0x44ff44, 0.014);
 			// for (let i = 0; i < numberBehind + 2; i++) {
-				// DebugPoint.add(sorted[this.nVertices - (i + 1)], 0xff4444, 0.014);
+			// DebugPoint.add(sorted[this.nVertices - (i + 1)], 0xff4444, 0.014);
 			// }
 		}
 
@@ -136,7 +135,7 @@ export default {
 		this.positions[this.nPos + 2] = pos.z;
 
 	},
-	
+
 
 	getNVerticesBehindPos(pos, vel) {
 

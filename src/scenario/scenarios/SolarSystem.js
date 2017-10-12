@@ -26,7 +26,7 @@ export default {
 		pluto,
 	],
 	secondsPerTick: { min: 3600 * 5, max: 3600 * 25, initial: 3600 * 10 },
-	defaultGuiSettings: { 
+	defaultGuiSettings: {
 		planetScale: 10,
 	},
 	help: 'This scenario shows all the planets of the Solar System. This includes Pluto, because Pluto will always be a planet in my heart.',

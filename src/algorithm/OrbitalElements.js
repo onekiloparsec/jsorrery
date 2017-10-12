@@ -1,20 +1,19 @@
+import { Euler, Quaternion, Vector3 } from 'three';
 
-import { Vector3, Euler, Quaternion } from 'three';
-
-import { sinh, sign, cosh } from './Math';
+import { cosh, sign, sinh } from './Math';
 import { getJ2000SecondsFromJD } from '../utils/JD';
-import { G, CENTURY, DAY, KM, DEG_TO_RAD, CIRCLE, AU, J2000 } from '../constants';
+import { AU, CENTURY, CIRCLE, DAY, DEG_TO_RAD, G, KM } from '../constants';
 
 function solveEccentricAnomaly(f, x0, maxIter) {
-		
+
 	let x = 0;
 	let x2 = x0;
-	
+
 	for (let i = 0; i < maxIter; i++) {
 		x = x2;
 		x2 = f(x);
 	}
-	
+
 	return x2;
 }
 
@@ -70,7 +69,7 @@ export default {
 		if (!this.orbitalElements) return new Vector3(0, 0, 0);
 
 		let eclipticVelocity;
-		
+
 		if (!this.relativeTo) {
 			const pos1 = this.calculatePosition(jd);
 			const pos2 = this.calculatePosition(jd + 60 / DAY);
@@ -96,7 +95,7 @@ export default {
 
 		//var diff = eclipticVelocityFromDelta.sub(eclipticVelocity);console.log(diff.length());
 		return eclipticVelocity;
-		
+
 	},
 
 	calculatePosition(jd, maxPrecision, isDbg) {
@@ -109,7 +108,7 @@ export default {
 		}
 		const computed = this.calculateElements(jd, isDbg);
 		const pos = this.getPositionFromElements(computed);
-		if (isDbg) console.log(this.name, pos.x, pos.y, pos.z, jd);		
+		if (isDbg) console.log(this.name, pos.x, pos.y, pos.z, jd);
 
 
 		return pos;
@@ -126,7 +125,7 @@ export default {
 		} else if (e === 1.0) {
 			return M;
 		}
-		
+
 		const E = Math.log(2 * M / e + 1.85);
 		return solveEccentricAnomaly(solveKeplerLaguerreConwayHyp(e, M), E, 30);
 	},
@@ -135,7 +134,7 @@ export default {
 
 		if (!this.orbitalElements) return null;
 
-		const orbitalElements = this.orbitalElements;
+		const { orbitalElements } = this.orbitalElements;
 
 		/*
 
@@ -160,7 +159,7 @@ export default {
 
 		*/
 		let correctedTimeEpoch = getJ2000SecondsFromJD(jd);
-		if (isDbg) console.log(correctedTimeEpoch, this.epochOffsetFromJ2000);		
+		if (isDbg) console.log(correctedTimeEpoch, this.epochOffsetFromJ2000);
 		if (this.epochOffsetFromJ2000) {
 			correctedTimeEpoch -= this.epochOffsetFromJ2000;
 		}

@@ -11,14 +11,8 @@ export default class InputButton {
 	constructor(labelTx, id, onClick, key) {
 
 		const classNames = BTNS_CLASS[id];
-		let classOff;
-		let classOn;
-		if (classNames instanceof Array) {
-			classOff = classNames[0];
-			classOn = classNames[1];
-		} else {
-			classOff = classNames;
-		}
+		const classOff = (classNames instanceof Array) ? classNames[0] : classNames;
+		const classOn = (classNames instanceof Array) ? classNames[1] : undefined;
 
 		const label = classOff ? '&nbsp;' : labelTx;
 		let status = false;

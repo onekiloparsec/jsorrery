@@ -1,4 +1,4 @@
- /**
+/**
  //THREE.js does not render right when distances are too large, as for example if the unit in three.js corresponded to one meter in the solar system
  */
 
@@ -15,8 +15,8 @@ export default {
 		//
 		if (obj instanceof Vector3) {
 			return obj.multiplyScalar(this.scale);
-		} 
+		}
 		return obj * this.scale;
 	},
-	
+
 };

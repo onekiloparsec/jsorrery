@@ -1,5 +1,4 @@
 
-
 export default class {
 	constructor(lat = 0, lng = 0) {
 		this.lat = lat;
@@ -23,7 +22,7 @@ export default class {
 		// console.log(str);
 		//40° 26′ 46″ N 79° 58′ 56″ W.
 		const degrees = str.match(/([\d]+)°?\s+([\d.]+)[′`']?\s+([\d.]+)[″"]?\s+(N|S)\s+([\d]+)°?\s+([\d.]+)[′`']?\s+([\d.]+)[″"]\s+(W|E)/i, str);
-		
+
 		// console.log(degrees);
 		if (degrees) {
 			return this.setLatLng(
@@ -49,7 +48,7 @@ export default class {
 		//40.446° N 79.982° W
 		const decimal = str.match(/([\d.-]+)°?[\s,]?(N|S)?\s{1,}([\d.-]+)°?\s?(W|E)?/i, str);
 		// console.log(decimal);
-	
+
 		if (decimal) {
 			return this.setLatLng(
 				Number(decimal[1]),
@@ -60,7 +59,7 @@ export default class {
 		}
 
 		return this.getLoc();
-		
+
 	}
 
 	setLatLng(lat, lng, latHemisphere = '', lngHemisphere = '') {
@@ -73,7 +72,7 @@ export default class {
 		if ((lngHemisphere.toLowerCase() === 'w' && this.lng > 0) || (lngHemisphere.toLowerCase() === 'e' && this.lng < 0)) this.lng *= -1;
 		// console.log(this.lat, this.lng);
 		return this.getLoc();
-		
+
 	}
 
 

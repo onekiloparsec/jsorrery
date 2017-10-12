@@ -1,6 +1,5 @@
 import { Vector3 } from 'three';
-import { AU, KM, J2000 } from '../../../../constants';
-import { getJ2000SecondsFromJD } from '../../../../utils/JD';
+import { AU, J2000, KM } from '../../../../constants';
 
 /*subroutine VSOP87 (tdj,ivers,ibody,prec,lu,r,ierr)
 *-----------------------------------------------------------------------
@@ -146,7 +145,7 @@ export function VSOP(jd) {
 	}
 
 	const q = Math.max(3, -Math.log10(prec + 1e-50));
-	
+
 	window.vsop.earth.forEach(params => {
 		const { it, ic, series } = params;
 
@@ -160,7 +159,7 @@ export function VSOP(jd) {
 			const a = series[i][0];
 			const b = series[i][1];
 			const c = series[i][2];
-			
+
 			// console.log(series[i].length);
 
 			if (Math.abs(a) < p) {
@@ -180,6 +179,6 @@ export function VSOP(jd) {
 	}
 	r[k] %= dpi;
 	if (r[k] < 0) r[k] += dpi;
-	
+
 	return new Vector3(r[1] * AU * KM, r[2] * AU * KM, r[3] * AU * KM);
 }

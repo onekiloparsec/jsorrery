@@ -74,8 +74,8 @@ export default {
 	usePhysics: true,
 	calculateAll: true,
 	useBarycenter: false,
-	defaultGuiSettings: { 
+	defaultGuiSettings: {
 		planetScale: 10,
 	},
-	help: "This scenario shows what would happen if, instantaneously at this moment, Jupiter's mass grew 1000 times larger.",
+	help: 'This scenario shows what would happen if, instantaneously at this moment, Jupiter\'s mass grew 1000 times larger.',
 };

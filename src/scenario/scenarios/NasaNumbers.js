@@ -1,7 +1,7 @@
 /**
-	source for calculations http://www.braeunig.us/apollo/apollo11-TLI.htm
-*/
-import { DEG_TO_RAD, RAD_TO_DEG, FT_TO_M, KM, CIRCLE, DAY } from '../../constants';
+ source for calculations http://www.braeunig.us/apollo/apollo11-TLI.htm
+ */
+import { CIRCLE, DAY, DEG_TO_RAD, FT_TO_M, KM, RAD_TO_DEG } from '../../constants';
 import { earth } from './bodies/earth';
 import { getJD } from '../../utils/JD';
 
@@ -28,12 +28,12 @@ function getLongAtLocalSiderealTime(dateGMT, longitude) {
 
 	const JD = Math.floor(365.25 * year) + Math.floor(30.6001 * (month + 1)) + day + 1720994.5 + GR;
 
-//		time sidereal 0h
+	//		time sidereal 0h
 	const T = (JD - 2415020) / 36525;
 	const SS = 6.6460656 + 2400.051 * T + 0.00002581 * T * T;
 	const ST = (SS / 24 - Math.floor(SS / 24)) * 24;
 
-//		time sidereal local
+	//		time sidereal local
 	const dayTime = (hour + (minute / 60) + (second / 3600)) / 24;
 	let SA = ST + dayTime * 24 * 1.002737908;
 	SA += longitude / 15;
@@ -42,12 +42,13 @@ function getLongAtLocalSiderealTime(dateGMT, longitude) {
 	const TSH = Math.floor(SA);
 	const TSM = Math.floor((SA - Math.floor(SA)) * 60);
 	const TSS = ((SA - Math.floor(SA)) * 60 - TSM) * 60;
-	
+
 	return ((TSH / 24) + (TSM / (24 * 60)) + (TSS / (24 * 60 * 60))) * 360;
 }
 
 
 const GM = 3.986005e14;
+
 function getMissionNumbers(orbitType = 'earth') {
 
 	//see http://www.braeunig.us/apollo/apollo11-TLI.htm
@@ -76,8 +77,9 @@ function getMissionNumbers(orbitType = 'earth') {
 
 	const rvgm = r * (v ** 2) / GM;
 	//true anomaly
-	const trueAnomaly = Math.atan((rvgm * Math.cos(pathAngle) * Math.sin(pathAngle)) / (rvgm * cosPathSq - 1));/**/
-	
+	const trueAnomaly = Math.atan((rvgm * Math.cos(pathAngle) * Math.sin(pathAngle)) / (rvgm * cosPathSq - 1));
+	/**/
+
 	const ln = Math.asin(Math.sin(DEG_TO_RAD * numbers.geoLat) / Math.sin(DEG_TO_RAD * numbers.incl));
 	const as = Math.atan(Math.tan(ln) * Math.cos(DEG_TO_RAD * numbers.incl));
 
@@ -98,7 +100,7 @@ function getMissionNumbers(orbitType = 'earth') {
 	const M = E - e * Math.sin(E);
 	const N = Math.sqrt(GM / (a ** 3));
 	// const T = M / N;
-	
+
 	/*
 	console.log('**************************************** '+orbitType);
 	console.log('r',r);
@@ -132,7 +134,7 @@ function getMissionNumbers(orbitType = 'earth') {
 			base: {
 				a: a / KM,
 				e,
-				w: (argumentPerigee * RAD_TO_DEG), 
+				w: (argumentPerigee * RAD_TO_DEG),
 				M: M * RAD_TO_DEG,
 				i: numbers.incl,
 				o: celestLongAscNode,

@@ -1,8 +1,8 @@
 
 // import $ from 'jquery';
-import { Color, Euler, Vector3 } from 'three';
-import { J2000, AU, SIDEREAL_DAY, NM_TO_KM, CIRCLE, YEAR, DAY, DEG_TO_RAD } from '../../../constants';
-import { J2000Date, getDeltaT } from '../../../utils/JD';
+import { Color, Euler } from 'three';
+import { AU, CIRCLE, DAY, DEG_TO_RAD, J2000, NM_TO_KM, SIDEREAL_DAY, YEAR } from '../../../constants';
+import { getDeltaT, J2000Date } from '../../../utils/JD';
 import { VSOP } from './earth/VSOP-earth';
 
 //time from where rotation is computed: the solstice before system's reference time (J2000)
@@ -27,7 +27,7 @@ export const earth = {
 		specular: new Color('grey'),
 	},
 	siderealDay: SIDEREAL_DAY,
-	
+
 	getRotationCorrection() {
 		const dt = getDeltaT(this.universe.getCurrentDate());
 		// console.log(baseRotation, dt);
@@ -37,7 +37,7 @@ export const earth = {
 	tilt: 23 + (26 / 60) + (21 / 3600),
 	positionCalculator: VSOP,
 	hasGeoposCam: true,
-	
+
 	//tilt is oriented by taking into account precession of equinoxes
 	getTilt(xCorrection = 0) {
 		const nYears = ((this.currentJD || 0) - J2000) / YEAR;

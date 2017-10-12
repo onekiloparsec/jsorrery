@@ -1,10 +1,10 @@
 
-import { Vector3, PerspectiveCamera } from 'three';
+import { PerspectiveCamera, Vector3 } from 'three';
 import { OrbitControls } from '../utils/ThreeExamples';
 import TracerManager from './lines/TracerManager';
 import OrbitLinesManager from './lines/OrbitLinesManager';
 import ExportValues from '../gui/ExportValues';
-import Gui, { LOOKFROM_ID, LOOKAT_ID } from '../gui/Gui';
+import Gui, { LOOKAT_ID, LOOKFROM_ID } from '../gui/Gui';
 import { DEG_TO_RAD } from '../constants';
 import GeoPos from './GeoPos';
 
@@ -41,7 +41,7 @@ function toggleCamera() {
 
 	//deactivate geopos GUI
 	if (currentCamera && currentCamera.geoPos) currentCamera.geoPos.deactivate();
-	
+
 	//reset all bodies to use fastest position computation
 	setPrecision(false);
 
@@ -55,7 +55,7 @@ function toggleCamera() {
 
 		//when looking from a body, we need max precision as a minor change in position changes the expected output (e.g. a bodie's position against the stars)
 		setPrecision(true);
-		
+
 		//if we look from a body to another, trace the lookat body's path relative to the pov UNLESS the look target is orbiting to the pov
 		if (lookAtBody && !lookAtBody.celestial.isOrbitAround(lookFromBody.celestial)) {
 			TracerManager.setTraceFrom(lookFromBody, lookAtBody);
@@ -95,13 +95,13 @@ function updateCamera() {
 	const controls = currentCamera.jsorrery && currentCamera.jsorrery.controls;
 
 	if (currentCamera.geoPos) currentCamera.geoPos.update();
-	
+
 	if (controls) {
 		controls.update();
 	} else if (viewSettings.lookFrom) {
 
 		if (lookAtBody) {
-			lookAt.copy(lookAtBody.getPosition()).sub(lookFromBody.getPosition());	
+			lookAt.copy(lookAtBody.getPosition()).sub(lookFromBody.getPosition());
 		} else if (viewSettings.lookAt === 'night') {
 			lookAt.copy(lookFromBody.getPosition());
 			lookAt.multiplyScalar(2);
@@ -112,7 +112,7 @@ function updateCamera() {
 		} else {
 			lookAt.set(0, 0, 0).sub(lookFromBody.getPosition());
 		}
-		
+
 		currentCamera.lookAt(lookAt);
 	}
 
@@ -182,14 +182,14 @@ export default {
 			from: Gui.addDropdown(LOOKFROM_ID, toggleCamera),
 			at: Gui.addDropdown(LOOKAT_ID, toggleCamera),
 		};
-		
+
 		trackOptionSelectors.from.addOption('Free camera', 'orbital');
 		trackOptionSelectors.at.addOption('System', 'universe');
 
 		if (universe.getBody().name === 'sun') {
 			trackOptionSelectors.at.addOption('Night (away from the sun)', 'night');
 		}
-		
+
 		trackOptionSelectors.at.addOption('Direction of velocity', 'front');
 		trackOptionSelectors.at.addOption('Inverse direction of velocity', 'back');
 
@@ -209,7 +209,7 @@ export default {
 		}
 	},
 
-	addBody(body3d) {				
+	addBody(body3d) {
 		trackOptionSelectors.from.addOption(body3d.celestial.title, body3d.celestial.name);
 		trackOptionSelectors.at.addOption(body3d.celestial.title, body3d.celestial.name);
 

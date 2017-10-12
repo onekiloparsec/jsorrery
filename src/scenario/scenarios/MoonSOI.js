@@ -13,7 +13,7 @@ export default {
 	forcedGuiSettings: {
 		scale: 1,
 	},
-	help: "This scenario tests the Sphere of inlufence of the Moon's gravitational field over the Earth's. We have bodies orbiting the Moon that are set inside or outside of the Moon's SOI, to observe what happens.",
+	help: 'This scenario tests the Sphere of inlufence of the Moon\'s gravitational field over the Earth\'s. We have bodies orbiting the Moon that are set inside or outside of the Moon\'s SOI, to observe what happens.',
 	bodies: {
 		moon: {
 			/*relativeTo: null,

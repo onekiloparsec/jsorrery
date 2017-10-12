@@ -36,8 +36,8 @@ export default {
 		haumea,
 	],
 	secondsPerTick: { min: 3600 * 5, max: 3600 * 25, initial: 3600 * 10 },
-	defaultGuiSettings: { 
+	defaultGuiSettings: {
 		planetScale: 10,
 	},
-	help: "This scenario shows all the planets of the Solar System plus dwarf planets. Also included is Halley's comet, but its orbit is an approximation, as I was not able to find its accurate orbital elements.",
+	help: 'This scenario shows all the planets of the Solar System plus dwarf planets. Also included is Halley\'s comet, but its orbit is an approximation, as I was not able to find its accurate orbital elements.',
 };

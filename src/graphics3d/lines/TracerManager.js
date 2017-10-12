@@ -1,6 +1,6 @@
 /**
-	Controls the trace of a body relative to another. Traces are not orbit lines, they are the path trace of a body relative to another
-*/
+ Controls the trace of a body relative to another. Traces are not orbit lines, they are the path trace of a body relative to another
+ */
 
 import Tracer from './Tracer';
 
@@ -14,7 +14,7 @@ export default {
 		this.activeTracers = [];
 	},
 
-	setTraceFrom(lookFromBody, lookAtBody) {				
+	setTraceFrom(lookFromBody, lookAtBody) {
 		this.removeTracers();
 		this.activeTracers.length = 0;
 		this.addTracer(lookAtBody, lookFromBody);
@@ -31,7 +31,7 @@ export default {
 
 	addTracer(tracingBody, traceFromBody) {
 		if (!tracingBody) return;
-		const tracer = tracingBody.tracer;
+		const { tracer } = tracingBody.tracer;
 		if (!tracer) return;
 		tracer.setTraceFrom(traceFromBody);
 		tracer.getNew();
@@ -40,11 +40,11 @@ export default {
 	},
 
 	removeTracers() {
-		const container = this.container;
-		
+		const { container } = this.container;
+
 		this.bodies3d.forEach(body3d => {
 			if (body3d.celestial.forceTrace) return;
-			const tracer = body3d.tracer;
+			const { tracer } = body3d.tracer;
 			//clear all traces first
 			if (!tracer) return;
 			container.remove(tracer.getDisplayObject());
@@ -75,7 +75,7 @@ export default {
 			this.deferredForceTraceBody = this.deferredForceTraceBody || [];
 			this.deferredForceTraceBody.push(body3d);
 		}
-		
+
 	},
 
 	kill() {

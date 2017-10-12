@@ -2,7 +2,7 @@
 	"extends": "airbnb",
 	"parser": "babel-eslint",
 	"env": {
-		"browser": true,
+		"browser": true
 	},
 	"rules": {
 		"strict": [2, "global"],
@@ -30,6 +30,7 @@
 		"import/prefer-default-export": [0],
 		"global-require": [0],
 		"no-bitwise": [0],
+		"no-multiple-empty-lines": ["error", { "max": 2, "maxBOF": 1}],
 		"no-plusplus": [0],
 		"no-console": ["warn", { "allow": ["warn", "error"] }],
 		"no-param-reassign": ["error", { "props": false }],

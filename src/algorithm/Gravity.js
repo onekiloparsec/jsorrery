@@ -3,8 +3,8 @@ import { G } from '../constants';
 
 export default {
 	/**
-	Calculates the forces that are created by each body toward one another
-	*/
+	 Calculates the forces that are created by each body toward one another
+	 */
 	calculateGForces(bodies) {
 		let workVect = new Vector3();
 
@@ -15,20 +15,21 @@ export default {
 				const skipComputation = (
 					(bodies[i].mass === 1 && bodies[j].mass === 1)
 					||
-					(bodies[i].useCustomComputation && bodies[j].useCustomComputation) 
+					(bodies[i].useCustomComputation && bodies[j].useCustomComputation)
 				);
 				if (!skipComputation) {
 					workVect = this.getGForceBetween(bodies[i].mass, bodies[j].mass, bodies[i].position, bodies[j].position);
 					//add forces (for the first body, it is the reciprocal of the calculated force)
 					bodies[i].force.sub(workVect);
-					bodies[j].force.add(workVect);/**/
+					bodies[j].force.add(workVect);
+					/**/
 				}
 			}
 		}
 	},
 	/**
-	Get the gravitational force in Newtons between two bodies (their distance in m, mass in kg)
-	*/
+	 Get the gravitational force in Newtons between two bodies (their distance in m, mass in kg)
+	 */
 	getGForceBetween(mass1, mass2, pos1, pos2) {
 		const workVect = new Vector3();
 		//vector is between positions of body A and body B

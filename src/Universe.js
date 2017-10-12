@@ -1,18 +1,18 @@
-/** 
+/**
 
 
-*/
+ */
 
 import { Vector3 } from 'three';
 
-import { USE_PHYSICS_BY_DEFAULT, DEFAULT_CALCULATIONS_PER_TICK, KM, J2000, DAY } from './constants';
+import { DAY, DEFAULT_CALCULATIONS_PER_TICK, KM, USE_PHYSICS_BY_DEFAULT } from './constants';
 import Labels from './graphics2d/Labels';
 import Scene from './graphics3d/Scene';
 import ResourceLoader from './loaders/ResourceLoader';
 import Ticker from './algorithm/Ticker';
 import CelestialBody from './CelestialBody';
-import Gui, { START_ID, DELTA_T_ID } from './gui/Gui';
-import { getJD, getJ2000SecondsFromJD, getDateFromJD } from './utils/JD';
+import Gui, { DELTA_T_ID, START_ID } from './gui/Gui';
+import { getDateFromJD, getJ2000SecondsFromJD, getJD } from './utils/JD';
 
 
 export default {
@@ -23,10 +23,10 @@ export default {
 		const initialSettings = Object.assign({}, scenario.defaultGuiSettings, qstrSettings, scenario.forcedGuiSettings);
 		// console.log(initialSettings);
 		Gui.setDefaults(initialSettings);
-		
+
 		this.usePhysics = scenario.usePhysics || USE_PHYSICS_BY_DEFAULT;
-		
-		Labels.init(); 
+
+		Labels.init();
 
 		//start/stop
 		Gui.addBtn('play', START_ID, () => {
@@ -40,13 +40,13 @@ export default {
 		});
 
 		this.ticker = () => this.tick();
-		
+
 		this.playing = false;
 		this.drawRequested = false;
 
 		const date = this.dateDisplay.getDate() || new Date();
 		this.setJD(getJD(date));
-		
+
 		this.createBodies(scenario);
 		this.scene = Object.create(Scene);
 		this.calculateDimensions();
@@ -95,7 +95,7 @@ export default {
 	},
 
 	createBodies(scenario) {
-		
+
 		const bodiesNames = Object.keys(scenario.bodies);
 		this.bodies = bodiesNames.map(name => {
 			const config = scenario.bodies[name];
@@ -139,7 +139,7 @@ export default {
 			this.scene.addBody(body);
 			body.afterInitialized(true);
 		});
-		
+
 		this.scene.setCentralBody(this.centralBody);
 
 		Ticker.setBodies(this.bodies);
@@ -147,7 +147,7 @@ export default {
 	/* balance the system by calculating hte masses of the non-central bodies and placing the central body to balance it.*/
 	setBarycenter() {
 		const central = this.centralBody;
-		
+
 		if (!this.usePhysics || central.isStill || this.scenario.useBarycenter === false) return;
 		let massRatio;
 		const massCenter = {
@@ -217,10 +217,10 @@ export default {
 			return memo < body.radius ? body.radius : memo;
 		}, 0);
 		//find the largest semi major axis in km among all bodies
-		let largestSMA = this.bodies.reduce((memo, body) => { 
+		let largestSMA = this.bodies.reduce((memo, body) => {
 			return (!body.isCentral && body.orbit && body.orbit.base.a > memo) ? body.orbit.base.a : memo;
 		}, 0);
-		let smallestSMA = this.bodies.reduce((memo, body) => { 
+		let smallestSMA = this.bodies.reduce((memo, body) => {
 			return (!body.isCentral && body.orbit && (!body.relativeTo || body.relativeTo === centralBodyName) && (!memo || body.orbit.base.a < memo)) ? body.orbit.base.a : memo;
 		}, 0);
 		smallestSMA *= KM;
@@ -228,7 +228,7 @@ export default {
 		largestRadius *= KM;
 
 		//console.log('universe size', largestSMA, ' m');
-		
+
 		this.size = largestSMA;
 		this.scene.setDimension(largestSMA, smallestSMA, largestRadius);
 
@@ -244,7 +244,7 @@ export default {
 		if (this.playing) {
 			this.setJD(this.currentJD + (Ticker.getDeltaT() / DAY));
 			Ticker.tick(this.usePhysics, this.currentJD);
-			
+
 			this.scene.updateCamera();
 			this.scene.draw();
 			this.showDate();

@@ -11,7 +11,7 @@ Quadratic.moveBodies = function moveBodies(jd, deltaT) {
 
 	this.computeDeltaT(deltaT);
 
-	let i; 
+	let i;
 	let b;
 	const n = {};
 
@@ -56,11 +56,9 @@ Quadratic.moveBodies = function moveBodies(jd, deltaT) {
 				n[i].accel.push(b.force.clone().multiplyScalar(b.invMass));
 
 				//pos1 = pos0 + (vel0 * deltat) + (accel05 * 0.5 * Math.pow(deltaT, 2))
-				n[i].pos.push(
-					n[i].pos[0].clone()
-						.add(b.getAbsoluteVelocity().multiplyScalar(deltaT))
-						.add(n[i].accel[1].clone().multiplyScalar(this.onehalf_deltaTSq))
-				);
+				n[i].pos.push(n[i].pos[0].clone()
+					.add(b.getAbsoluteVelocity().multiplyScalar(deltaT))
+					.add(n[i].accel[1].clone().multiplyScalar(this.onehalf_deltaTSq)));
 				b.position.copy(n[i].pos[2]);
 			}
 		}
@@ -82,7 +80,7 @@ Quadratic.moveBodies = function moveBodies(jd, deltaT) {
 	let c2;
 	let deltaV;
 	let deltaP;
-	for (i = 0; i < this.bodies.length; i++) {		
+	for (i = 0; i < this.bodies.length; i++) {
 
 		b = this.bodies[i];
 		if (!b.calculateFromElements && !b.isStill) {
@@ -108,7 +106,7 @@ Quadratic.moveBodies = function moveBodies(jd, deltaT) {
 				.add(c1.clone().multiplyScalar((this.onesixth_deltaT3rd)))
 				.add(c2.clone().multiplyScalar((this.onetwelvth_deltaT4th)));
 
-			this.bodies[i].position.copy(n[i].pos[0]).add(deltaP);	
+			this.bodies[i].position.copy(n[i].pos[0]).add(deltaP);
 			this.bodies[i].addToAbsoluteVelocity(deltaV);
 		}
 

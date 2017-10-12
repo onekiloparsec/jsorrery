@@ -1,7 +1,7 @@
-import { Vector3, ShaderMaterial, Object3D, PlaneGeometry, Mesh, PointLight, DirectionalLight } from 'three';
+import { DirectionalLight, Mesh, Object3D, PlaneGeometry, PointLight, ShaderMaterial, Vector3 } from 'three';
 import ResourceLoader from '../loaders/ResourceLoader';
 import Dimensions from './Dimensions';
-import { KM, DEG_TO_RAD } from '../constants';
+import { DEG_TO_RAD, KM } from '../constants';
 import CameraManager from './CameraManager';
 import Body3D from './Body3d';
 import { radius as sunRadius } from '../scenario/scenarios/bodies/sun';
@@ -12,7 +12,7 @@ class SunCorona {
 		this.root = new Object3D();
 		this.sunSize = Dimensions.getScaled(sunRadius * KM);
 		const geoSize = scene.getSize() * 0.4;
-		
+
 		const uniforms = {
 			aspectRatio: { type: 'f', value: scene.getAspectRatio() },
 			sunPosition: { type: 'v3', value: new Vector3() },
@@ -21,12 +21,12 @@ class SunCorona {
 			randAngle: { type: 'f', value: 0.0 },
 			camAngle: { type: 'f', value: 0.0 },
 		};
-		
+
 		this.uniforms = uniforms;
-		
+
 		const onShaderLoaded = ResourceLoader.loadShaders('sun');
 		onShaderLoaded.then(shaders => {
-			
+
 			const mat = new ShaderMaterial({
 				fragmentShader: shaders.fragment,
 				vertexShader: shaders.vertex,
@@ -47,7 +47,8 @@ class SunCorona {
 
 		this.mesh.quaternion.copy(CameraManager.getCamera().quaternion);
 
-		this.mesh.position.copy(camToSun.clone().multiplyScalar(0.1));/**/
+		this.mesh.position.copy(camToSun.clone().multiplyScalar(0.1));
+		/**/
 		// const scaleRatio = (camToSun.length() / this.stageSize) * 0.8;
 
 		const sunScreenPos = sunPos.clone().project(CameraManager.getCamera());
@@ -55,7 +56,7 @@ class SunCorona {
 		// sceneH = $(window).height();
 		// this.sky.mesh.scale.set(scaleRatio, scaleRatio, scaleRatio);/**/
 		this.uniforms.sunPosition.value.copy(camToSun.multiplyScalar(-1));
-		
+
 		const visibleW = Math.tan(DEG_TO_RAD * CameraManager.getCamera().fov / 2) * camToSun.length() * 2;
 		const sunScaledSize = this.sunSize * this.scale;
 		const sunScreenRatio = sunScaledSize / visibleW;
@@ -88,16 +89,16 @@ export class ExternalSun {
 		sunPos.setLength(this.universe.getScene().getSize() * 4).negate();
 		this.root.position.copy(sunPos);
 		this.corona.draw(camPos, sunPos);
-		
+
 	}
-	
+
 	getDisplayObject() {
 		return this.root;
 	}
 }
 
 export default class Sun extends Body3D {
-	
+
 	draw(camPos) {
 		if (!camPos) return;
 		const sunPos = Dimensions.getScaled(this.celestial.getPosition());

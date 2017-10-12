@@ -33,5 +33,5 @@ export default class InputSlider {
 	setSlideValue(val) {
 		this.slider.val(val);
 	}
-	
+
 }

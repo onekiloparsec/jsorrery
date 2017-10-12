@@ -16,6 +16,8 @@ export default {
 	},
 
 	getExport() {
-		return Object.assign({}, vals, { cx: cam.position.x, cy: cam.position.y, cz: cam.position.z, fov: cam.fov });
+		return Object.assign({}, vals, {
+			cx: cam.position.x, cy: cam.position.y, cz: cam.position.z, fov: cam.fov 
+		});
 	},
 };

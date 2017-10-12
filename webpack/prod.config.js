@@ -1,8 +1,8 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var autoprefixer = require('autoprefixer');
-var csswring = require('csswring');
+var path = require('path')
+var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var autoprefixer = require('autoprefixer')
+var csswring = require('csswring')
 
 
 module.exports = {
@@ -37,50 +37,73 @@ module.exports = {
 	],
 
 	resolve: {
-		extensions: ['', '.js', '.json'],
-		modulesDirectories: ['node_modules', 'src'],
-		alias: {
-		},
+		extensions: ['.js', '.json'],
+		modules: ['node_modules', 'src'],
+		alias: {},
 	},
 
 	module: {
-		loaders: [{
-			test: /bootstrap\/js\//,
-			loader: 'imports?jQuery=jquery',
-		}, {
-			test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-			loader: 'url?limit=10000&mimetype=application/font-woff',
-		}, {
-			test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-			loader: 'url?limit=10000&mimetype=application/font-woff2',
-		}, {
-			test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-			loader: 'url?limit=10000&mimetype=application/octet-stream',
-		}, {
-			test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
-			loader: 'url?limit=10000&mimetype=application/font-otf',
-		}, {
-			test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-			loader: 'file',
-		}, {
-			test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-			loader: 'url?limit=10000&mimetype=image/svg+xml',
-		}, {
-			test: /\.js$/,
-			loaders: ['babel-loader', 'eslint-loader'],
-			exclude: /node_modules/,
-		}, {
-			test: /\.scss$/,
-			loader: 'css!postcss-loader!sass',
-		}, {
-			test: /\.png$/,
-			loader: 'file?name=[name].[ext]',
-		}, {
-			test: /\.jpg$/,
-			loader: 'file?name=[name].[ext]',
-		}],
-	},
-	postcss: function() {
-		return [autoprefixer({ browsers: ['last 2 versions', 'safari 5', 'ie 9', 'ios 6', 'android 4'] }), csswring];
-	},
-};
+		rules: [
+			{
+				test: /bootstrap\/js\//,
+				loader: 'imports?jQuery=jquery',
+			},
+			{
+				test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+				loader: 'url?limit=10000&mimetype=application/font-woff',
+			},
+			{
+				test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+				loader: 'url?limit=10000&mimetype=application/font-woff2',
+			},
+			{
+				test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+				loader: 'url?limit=10000&mimetype=application/octet-stream',
+			},
+			{
+				test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
+				loader: 'url?limit=10000&mimetype=application/font-otf',
+			},
+			{
+				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+				loader: 'file',
+			},
+			{
+				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+				loader: 'url?limit=10000&mimetype=image/svg+xml',
+			},
+			{
+				test: /\.js$/,
+				loaders: ['babel-loader', 'eslint-loader'],
+				exclude: /node_modules/,
+			},
+			{
+				test: /\.png$/,
+				loader: 'file?name=[name].[ext]',
+			},
+			{
+				test: /\.jpg$/,
+				loader: 'file?name=[name].[ext]',
+			},
+			{
+				test: /\.scss$/,
+				loader: 'css!postcss-loader!sass',
+			},
+			{
+				test: /\.(sass|less|styl|sss|css)$/,
+				use: [
+					{
+						loader: 'css?localIdentName=[path]!postcss-loader!sass',
+						options: {
+							options: {/* PostCSS Options */},
+							plugins: () => [
+								autoprefixer({browsers: ['last 2 versions', 'safari 5', 'ie 9', 'ios 6', 'android 4']}),
+								csswring
+							]
+						}
+					}
+				]
+			}
+		]
+	}
+}

@@ -8,7 +8,7 @@ export const mercury = {
 	radius: 2439,
 	color: '#588a7b',
 	map: './img/mercurymap.jpg',
-	orbit: { 
+	orbit: {
 		base: {
 			a: 0.38709927 * AU,
 			e: 0.20563593,

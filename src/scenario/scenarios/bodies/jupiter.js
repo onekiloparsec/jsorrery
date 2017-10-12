@@ -11,7 +11,7 @@ export const jupiter = {
 	map: './img/jupitermap.jpg',
 	orbit: {
 		base: {
-			a: 5.20288700 * AU, 
+			a: 5.20288700 * AU,
 			e: 0.04838624,
 			i: 1.30439695,
 			l: 34.39644051,

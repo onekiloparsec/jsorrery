@@ -1,4 +1,4 @@
-import { TweenMax, Sine } from 'gsap';
+import { Sine, TweenMax } from 'gsap';
 import { DAY } from '../../../constants';
 import MoonRealOrbit from './moon/OsculatingOrbit';
 import { ELP82B } from './moon/elp';

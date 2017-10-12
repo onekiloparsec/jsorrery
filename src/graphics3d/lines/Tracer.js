@@ -1,7 +1,7 @@
 
-import { Vector3, Object3D, LineBasicMaterial, Geometry, Line } from 'three';
+import { Geometry, Line, LineBasicMaterial, Object3D, Vector3 } from 'three';
 import { darken, hexToRgb, rgbToHex } from '../../utils/ColorUtils';
-import { IS_SCREENSHOT, IS_CAPTURE } from '../../constants';
+import { IS_CAPTURE, IS_SCREENSHOT } from '../../constants';
 
 //a change of direction of x radians triggers a vertex switch in the path (equivalent to adding a vertex);
 const SWITCH_TRESHOLD = 0.005;
@@ -24,7 +24,7 @@ export default {
 	},
 
 	getNew() {
-		
+
 		this.detachTrace();
 
 		const material = new LineBasicMaterial({
@@ -70,7 +70,7 @@ export default {
 		const pos = this.setTracePos(fromPos);
 		if (this.geom.vertices[this.currentVertex] && this.geom.vertices[this.currentVertex].distanceTo(pos) === 0) return;
 		this.geom.verticesNeedUpdate = true;
-		
+
 		if (this.currentVertex < this.lastVertexIdx) {
 			for (let i = this.currentVertex; i < this.nVertices; i++) {
 				this.geom.vertices[i].copy(pos);
@@ -85,10 +85,10 @@ export default {
 			this.geom.vertices[this.lastVertexIdx].copy(pos);
 		}
 
-		const v2 = this.geom.vertices[this.currentVertex - 2]; 
-		const v1 = this.geom.vertices[this.currentVertex - 1]; 
+		const v2 = this.geom.vertices[this.currentVertex - 2];
+		const v1 = this.geom.vertices[this.currentVertex - 1];
 		const v0 = this.geom.vertices[this.currentVertex];
-		
+
 		if (v1 && v2) {
 
 			if (!this.lastPathDirection) {
@@ -107,7 +107,7 @@ export default {
 			this.changeVertex();
 		}
 		this.previousPos = pos;
-					
+
 	},
 
 	setTracePos(pos) {

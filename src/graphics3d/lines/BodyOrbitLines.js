@@ -3,7 +3,7 @@ import OrbitLine from '../lines/OrbitLine';
 import { DAY } from '../../constants';
 
 export default {
-			
+
 	init(body3d, isForceSolidLines) {
 		this.isForceSolidLines = isForceSolidLines;
 		this.body3d = body3d;
@@ -52,7 +52,8 @@ export default {
 				}
 				this.eclipticLine.setLine(eclipticVertices);
 				// console.log(this.eclipticLine);
-			}/**/
+			}
+			/**/
 
 			//if this body's orbit is heavily perturbed, we recompute the path at each revolution
 			if (this.celestial.useCustomComputation && this.celestial.showSolidOrbit) {
@@ -93,7 +94,7 @@ export default {
 		if (!this.orbitLine) return;
 		this.orbitLine.added = true;
 		this.getOrbitContainer().add(this.orbitLine.getDisplayObject());
-		
+
 		//this.getOrbitContainer().add(this.ellipticOrbitLine.getDisplayObject());
 	},
 

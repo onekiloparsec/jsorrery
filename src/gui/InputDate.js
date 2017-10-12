@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import ExportValues from './ExportValues';
-import { DATE_ID, DATE_DISPLAY_ID } from './Gui';
+import { DATE_DISPLAY_ID, DATE_ID } from './Gui';
 
 let inp;
 let display;
@@ -18,7 +18,7 @@ export default {
 		let curDate;
 		inp.off('change').on('change.jsorrery', () => {
 			let newDate = new Date(inp.val());
-			if (isNaN(newDate.getTime())) {
+			if (Number.isNaN(newDate.getTime())) {
 				newDate = new Date();
 			}
 			if (curDate !== newDate) {
@@ -37,7 +37,7 @@ export default {
 	getWidget() {
 		return inp;
 	},
-	
+
 	setDate(d) {
 		date = d;
 		if (d) {

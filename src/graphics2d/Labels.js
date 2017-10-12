@@ -42,8 +42,11 @@ function getPlanetLabelCallback(el, body3d) {
 		screenCoords = toScreenCoords(body3d.getPosition(), camPos, fov);
 		// console.log(camPos.x, body3d.getPosition().x, body3d.celestial.name);
 		if (screenCoords) {
-			const alpha = 1 / screenCoords.z; 
-			el.css({ transform: `translate(${screenCoords.x}px, ${screenCoords.y}px) scale(${screenCoords.z})`, opacity: alpha }).show();
+			const alpha = 1 / screenCoords.z;
+			el.css({
+				transform: `translate(${screenCoords.x}px, ${screenCoords.y}px) scale(${screenCoords.z})`,
+				opacity: alpha
+			}).show();
 		} else {
 			el.hide();
 		}
@@ -72,7 +75,9 @@ function getEventLabelCallback(el, pos, relativeTo) {
 			tipPos = { x: Math.sin(radAngle) * EVENT_LABEL_LINE_H, y: -Math.cos(radAngle) * EVENT_LABEL_LINE_H };
 			cssRot = `rotate(${angle}deg)`;
 
-			line.css({ WebkitTransform: cssRot, '-moz-transform': cssRot, left: tipPos.x, top: tipPos.y });
+			line.css({
+				WebkitTransform: cssRot, '-moz-transform': cssRot, left: tipPos.x, top: tipPos.y
+			});
 			tx.css({ left: tipPos.x - txHalfW, top: tipPos.y - txH });
 			el.css({ left: screenCoords.x + 'px', top: screenCoords.y + 'px' }).show();
 		} else {
@@ -93,7 +98,7 @@ export default {
 
 	addPlanetLabel(title, body3d) {
 		const el = $(`<div class="planetSpot" data-shown="true"><div class="planetLabel">${title}</div></div>`).appendTo('body');
-		
+
 		labels.push({
 			el,
 			callback: getPlanetLabelCallback(el, body3d),

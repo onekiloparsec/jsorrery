@@ -14,7 +14,7 @@ export default {
 	},
 
 	capture() {
-		
+
 		if (this.i % this.params.interval === 0) {
 			const img = this.renderer.domElement.toDataURL();
 			$.ajax({
@@ -28,7 +28,7 @@ export default {
 					//console.log(data)
 				},
 				error(a, b, c) {
-					console.log(a, b, c);// eslint-disable-line
+					console.log(a, b, c)// eslint-disable-line
 				},
 			});
 		}

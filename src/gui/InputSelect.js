@@ -17,7 +17,7 @@ export default class InputSelect {
 	getWidget() {
 		return [this.display, this.list];
 	}
-	
+
 	addOption(label, val, isSelected) {
 
 		const option = this.options[val] = $(`<li data-value="${val}">${label}</li>`);
@@ -40,7 +40,7 @@ export default class InputSelect {
 	}
 
 	toggleOptions(toToggle, isShow) {
-		const options = this.options;
+		const { options } = this.options;
 		const toggleFcn = isShow ? 'removeClass' : 'addClass';
 		const curVal = this.input.val();
 		// if (!isShow && ~toToggle.indexOf(curVal)) {
@@ -65,5 +65,5 @@ export default class InputSelect {
 	clickHandler = (e) => {
 		this.listClicked($(e.currentTarget));
 	}
-	
+
 }

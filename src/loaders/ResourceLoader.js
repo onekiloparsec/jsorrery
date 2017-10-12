@@ -28,7 +28,7 @@ function getCached(id) {
 }
 
 export default {
-	
+
 	reset() {
 		currentScenarioLoaders = [];
 	},
@@ -38,7 +38,7 @@ export default {
 	},
 
 	loadTexture(mapSrc) {
-		
+
 		const onLoaded = new Promise(resolve => {
 			const loader = new TextureLoader();
 			loader.load(mapSrc, (tx) => {

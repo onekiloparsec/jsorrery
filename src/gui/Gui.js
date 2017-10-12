@@ -56,7 +56,7 @@ function setOnChange(id, defaultOnChange) {
 function hideContent(content) {
 	TweenMax.killTweensOf(content);
 	TweenMax.to(content, 0.3, {
-		opacity: 0, 
+		opacity: 0,
 		onComplete() {
 			content.hide();
 		}
@@ -68,7 +68,7 @@ function showContent(content) {
 	TweenMax.killTweensOf(content);
 	content.show();
 	TweenMax.to(content, 0.3, {
-		opacity: 1, 
+		opacity: 1,
 	});
 	return true;
 }
@@ -136,16 +136,16 @@ export default {
 	},
 
 	addDropdown(id, callback) {
-		emptyContainer(id);		
+		emptyContainer(id);
 		const sel = new InputSelect(id, defaultSettings[id], callback);
 		const widget = sel.getWidget();
 		addWidget(id, widget, 'dropdown');
-		
+
 		return sel;
 	},
 
 	addSlider(id, options, onChange) {
-		emptyContainer(id);		
+		emptyContainer(id);
 		const defaultVal = Number(defaultSettings[id]) || (options && options.initial) || 1;
 		const slider = new InputSlider(id, defaultVal, setOnChange(id, onChange), options);
 		const widget = slider.getWidget();
@@ -158,14 +158,14 @@ export default {
 		addWidget(DATE_ID, InputDate.getWidget());
 		return InputDate;
 	},
-	
+
 	addGeoloc(originalValues, onChange) {
 		emptyContainer(GEOLOC_ID);
 		// console.log(defaultSettings[GEOLOC_ID]);
 		// console.log(originalValues);
 		InputGeoCoord.init(defaultSettings[GEOLOC_ID] || originalValues, setOnChange(GEOLOC_ID, onChange));
 		addWidget(GEOLOC_ID, InputGeoCoord.getWidget());
-		
+
 		return InputGeoCoord;
 	},
 

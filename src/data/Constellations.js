@@ -13,7 +13,7 @@ export default {
 	Brachium: [
 		'uLibra',
 	],
-	
+
 	Mesarthim: [
 		'Sharatan',
 	],

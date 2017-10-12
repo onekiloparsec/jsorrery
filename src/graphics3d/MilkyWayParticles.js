@@ -1,5 +1,17 @@
 
-import { LineBasicMaterial, Geometry, BufferAttribute, BufferGeometry, Line, Color, Object3D, Vector3, ShaderMaterial, AdditiveBlending, Points } from 'three';
+import {
+	AdditiveBlending,
+	BufferAttribute,
+	BufferGeometry,
+	Color,
+	Geometry,
+	Line,
+	LineBasicMaterial,
+	Object3D,
+	Points,
+	ShaderMaterial,
+	Vector3
+} from 'three';
 import Promise from 'bluebird';
 
 import Constellations from '../data/Constellations';
@@ -61,7 +73,7 @@ function drawConstellations() {
 		toArr.forEach(toName => {
 			const toPoint = namedStars[toName];
 			if (!toPoint || !fromPoint) return;
-			
+
 			const orbitGeom = new Geometry();
 			orbitGeom.vertices = [fromPoint, toPoint];
 			const line = new Line(orbitGeom, material);
@@ -72,7 +84,7 @@ function drawConstellations() {
 }
 
 function generateStars(shaders, stars, starTexture, size) {
-	
+
 	const geometry = new BufferGeometry();
 	const count = stars.length;
 
@@ -107,7 +119,7 @@ function generateStars(shaders, stars, starTexture, size) {
 			//starVect.size = 2;
 			// starColor = lightenDarkenColor(starColor, ((1 / mag) ** 0.8));
 			starColor = lightenDarkenColor(starColor, ((1 / mag) ** 0.9));
-		}			
+		}
 		/**/
 
 		positions[i3 + 0] = starVect.x;
@@ -140,7 +152,7 @@ function generateStars(shaders, stars, starTexture, size) {
 	});
 
 	const particleSystem = new Points(geometry, shaderMaterial);
-	
+
 	rendered.add(particleSystem);
 	drawConstellations();
 
@@ -150,7 +162,7 @@ export default {
 	// dataSrc: './data/milkyway.json',
 	dataSrc: './data/milkyway_heasarc_204k.json',
 	init(size) {
-		
+
 		// create the particle system
 		rendered = this.displayObj = new Object3D();
 		//var particleSystem = new Points(particles, pMaterial);
@@ -160,7 +172,7 @@ export default {
 		const onShaderLoaded = ResourceLoader.loadShaders('stars');
 
 		const starTextureLoader = ResourceLoader.loadTexture('./img/star.png');
-		
+
 		return Promise.all([onShaderLoaded, onDataLoaded, starTextureLoader]).then(response => {
 			const [shaderResponse, dataResponse, textureResponse] = response;
 			// console.log(dataResponse);

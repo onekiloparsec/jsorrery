@@ -11,7 +11,7 @@ export default {
 	init(defaultVals, onChangeCallback) {
 		loc = new GeoCoord();
 		if (typeof defaultVals === 'string') {
-			loc.setFromString(defaultVals);			
+			loc.setFromString(defaultVals);
 		} else {
 			loc.setValue(defaultVals);
 		}
@@ -19,11 +19,11 @@ export default {
 
 		function onChange() {
 			loc.setFromString(inp.val());
-			inp.val(loc.getString());		
+			inp.val(loc.getString());
 			onChangeCallback(loc.getLoc());
 			ExportValues.setVal(GEOLOC_ID, loc.getString());
 		}
-		
+
 		inp.off('change').on('change.jsorrery', onChange);
 		onChange();
 	},

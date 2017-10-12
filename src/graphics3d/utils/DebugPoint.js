@@ -1,12 +1,12 @@
 
-import { MeshBasicMaterial, Mesh, SphereGeometry, ArrowHelper } from 'three';
+import { ArrowHelper, Mesh, MeshBasicMaterial, SphereGeometry } from 'three';
 
 const points = [];
 const arrows = [];
 let container;
 
 export default {
-	
+
 	add(pos, color, size = 0.3) {
 
 		const p = new Mesh(
@@ -31,10 +31,10 @@ export default {
 		});
 		arrows.length = 0;
 	},
-	
+
 	addArrow(pos, dir, l = 20, color = 0x666666) {
 		if (!dir || !pos) return;
-		container.remove(this.vel);		
+		container.remove(this.vel);
 		const a = new ArrowHelper(dir.clone().normalize(), pos.clone(), l, color);
 		container.add(a);
 		arrows.push(a);

@@ -28,8 +28,7 @@ const apolloBase = {
 	vertexDist: 100000,
 	forceTrace: true,
 	showSolidOrbit: true,
-	data: {
-	},
+	data: {},
 	logForces: true,
 };
 
@@ -78,7 +77,7 @@ const apolloTLI = Object.assign(
 				}
 
 				this.data.lastEarthDist = dist;
-				
+
 			}
 		},
 	}
@@ -98,14 +97,13 @@ export default {
 		scale: 1,
 	},
 	bodies: {
-		earth: {
-		
-		},
+		earth: {},
 		moon: {
 			useCustomComputation,
 			showSolidOrbit: true,
 		},
-		apolloTLI: Object.assign({},
+		apolloTLI: Object.assign(
+			{},
 			apolloTLI,
 			apolloTLIOrbit,
 			{
@@ -121,5 +119,5 @@ export default {
 			}
 		)/**/
 	},
-	help: "Paths of Apollo <a href=\"http://en.wikipedia.org/wiki/Free_return_trajectory\" target=\"_blank\">free return trajectories</a> are calculated from data available on Nasa's website. Data for every Moon mission is available, but all don't work perfectly in the simulation. I chose to display Apollo 8, because it was the first mission to get to the moon. The return path doesn't get exactly to Earth's atmosphere, but keep in mind that the simulated trajectory that you see here does not depend solely on Apollo's numbers, but also on the Moon's and the Earth's calculated positions, velocities and masses. Furthermore, I can't pretend that the algorithm I programmed to calculate the forces resulting from gravity is on par with what Nasa scientists can do. Still, the simulation is precise enough to get a very good idea of the shape of the free return trajectory and the genius behind it.",
+	help: 'Paths of Apollo <a href="http://en.wikipedia.org/wiki/Free_return_trajectory" target="_blank">free return trajectories</a> are calculated from data available on Nasa\'s website. Data for every Moon mission is available, but all don\'t work perfectly in the simulation. I chose to display Apollo 8, because it was the first mission to get to the moon. The return path doesn\'t get exactly to Earth\'s atmosphere, but keep in mind that the simulated trajectory that you see here does not depend solely on Apollo\'s numbers, but also on the Moon\'s and the Earth\'s calculated positions, velocities and masses. Furthermore, I can\'t pretend that the algorithm I programmed to calculate the forces resulting from gravity is on par with what Nasa scientists can do. Still, the simulation is precise enough to get a very good idea of the shape of the free return trajectory and the genius behind it.',
 };

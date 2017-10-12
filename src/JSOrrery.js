@@ -21,12 +21,13 @@ function getInitialSettings() {
 			z: qstr.cz,
 			fov: qstr.fov,
 		};
-	} 
+	}
 
 	return qstr;
 }
 
 let activeScenario;
+
 function loadScenarioFromName(name, defaultParams) {
 	if (activeScenario && name === activeScenario.name) {
 		Preloader.remove();
@@ -43,6 +44,7 @@ export function loadScenario(scenarioConfig, defaultParams) {
 	}
 
 	activeScenario = Object.create(Universe);
+
 	// console.log(activeScenario);
 	function getSceneReady() {
 		return activeScenario.init(scenarioConfig, defaultParams);
@@ -57,7 +59,7 @@ export function loadScenario(scenarioConfig, defaultParams) {
 		onSceneReady = getSceneReady();
 	}
 	return onSceneReady.then(() => Preloader.remove()).catch((e) => {
-		console.log(e);	// eslint-disable-line
+		console.log(e)	// eslint-disable-line
 	}).then(() => {
 		return activeScenario;
 	});
@@ -76,11 +78,11 @@ export default function jsOrrery() {
 		Preloader.show();
 		loadScenarioFromName(scenarioChanger.getValue());
 	});
-	
+
 	Gui.addBtn(SHARE_ID, SHARE_ID, () => {
 		Sharer.show();
 	});
-	
+
 	//dump scenarios specific descriptions in the scenario help panel
 	const help = scenarios.reduce((carry, scenario) => {
 		return `${carry} <h3>${scenario.title}</h3><p>${scenario.help}</p>`;
@@ -92,7 +94,7 @@ export default function jsOrrery() {
 			return idx;
 		}
 		return carry;
-	}, 0);	
+	}, 0);
 
 	//add scenarios to dropdown
 	scenarios.forEach((scenario, idx) => {

@@ -3,6 +3,7 @@ import { TweenMax } from 'gsap';
 import Promise from 'bluebird';
 
 let preloader;
+
 function getNode() {
 	if (preloader) return preloader;
 	preloader = document.getElementById('preload');
@@ -10,7 +11,7 @@ function getNode() {
 }
 
 export default {
-	
+
 	remove() {
 		const node = getNode();
 		if (!node) return Promise.resolve();

@@ -1,6 +1,6 @@
 /**
-	Controls the display/hiding of orbit lines depending on the camera that is active
-*/
+ Controls the display/hiding of orbit lines depending on the camera that is active
+ */
 
 import BodyOrbitLines from './BodyOrbitLines';
 
@@ -14,20 +14,20 @@ export default {
 	},
 
 	/**
-	Reset the default behavior of every orbit's orbit line (show the orbit, not the ecliptic)
-	*/
+	 Reset the default behavior of every orbit's orbit line (show the orbit, not the ecliptic)
+	 */
 	hideAllOrbits() {
 		this.orbits.forEach(orbit => {
 			orbit.hideOrbit();
 		});
 	},
-	
+
 	showAllOrbits() {
 		this.orbits.forEach(orbit => {
 			orbit.showOrbit();
 		});
 	},
-	
+
 	hideAllEcliptics() {
 		this.orbits.forEach(orbit => {
 			orbit.hideEcliptic();
@@ -54,7 +54,7 @@ export default {
 			this.orbits[idx] = orbit;
 		}
 	},
-	
+
 	onCameraChange(lookFromBody, lookAtBody) {
 
 		const lookFromBodyOrbit = lookFromBody && this.getOrbitFromName(lookFromBody.getName());
@@ -63,12 +63,13 @@ export default {
 		if (lookFromBodyOrbit) {
 			this.hideAllOrbits();
 			this.hideAllEcliptics();
-			
+
 			lookFromBodyOrbit.showEcliptic();
 
 			if (lookAtBodyOrbit && lookAtBody.celestial.isOrbitAround(lookFromBody.celestial) && !lookAtBody.celestial.maxPrecision) {
 				lookAtBodyOrbit.showOrbit();
-			}/**/
+			}
+			/**/
 
 		} else {
 			this.resetAllOrbits();

@@ -1,7 +1,7 @@
 
-import { Vector3, Euler } from 'three';
+import { Euler, Vector3 } from 'three';
 import OrbitalElements from './algorithm/OrbitalElements';
-import { RAD_TO_DEG, CIRCLE, DAY, J2000 } from './constants';
+import { CIRCLE, DAY, J2000, RAD_TO_DEG } from './constants';
 
 export default {
 	init(universe) {
@@ -33,17 +33,17 @@ export default {
 		this.position = this.isCentral ? new Vector3() : this.orbitalElements.calculatePosition(jd, this.maxPrecision);
 
 		this.relativePosition = this.position.clone();
-		
+
 		this.lastPos = this.position.clone();
 		this.absvelocity = null;
 		this.relvelocity = null;
 		return this.position;
 	},
-	
+
 	getAngleTo(bodyName) {
 		const ref = this.universe.getBody(bodyName);
 		if (ref) {
-			
+
 			const eclPos = this.position.clone().sub(ref.getPosition()).normalize();
 			eclPos.z = 0;
 			const angleX = eclPos.angleTo(new Vector3(1, 0, 0));
@@ -64,7 +64,7 @@ export default {
 			this.positionRelativeTo();
 		}
 		if (this.customInitialize) this.customInitialize();
-		
+
 		if (this.customAfterTick) this.customAfterTick(0);
 	},
 
@@ -94,13 +94,15 @@ export default {
 		return new Euler(xCorr, 0, 0, 'YZX');
 	},
 
-	beforeMove() {},
-	afterMove() {},
+	beforeMove() {
+	},
+	afterMove() {
+	},
 
 	/**
-	Calculates orbit line from orbital elements.
-	isFuture indicate if we want the elements for future orbit or for passed orbit (it changes for perturbed orbits)
-	*/
+	 Calculates orbit line from orbital elements.
+	 isFuture indicate if we want the elements for future orbit or for passed orbit (it changes for perturbed orbits)
+	 */
 	getOrbitVertices(isFuture) {
 
 		const startTime = this.currentJD;
@@ -129,18 +131,18 @@ export default {
 					for (let j = 0; j < angle; j++) {
 						step = (incr * (i - 1)) + ((incr / angle) * j);
 						point = this.calculatePosition(startTime + (multiplyer * step) / DAY);
-						
+
 						//when finishing the circle try to avoid going too far over 360 (break after first point going over 360)
 						if (total > 358) {
 							angleToPrevious = point.angleTo(points[0]) * RAD_TO_DEG;
 							if ((angleToPrevious + total) > 360) {
 								points[arrayAction](point);
 								break;
-							} 
+							}
 						}
 
 						points[arrayAction](point);
-						
+
 					}
 					total += point.angleTo(lastPoint) * RAD_TO_DEG;
 					lastPoint = point;
@@ -153,7 +155,7 @@ export default {
 		}
 		return points;
 	},
-	
+
 	afterTick(deltaT, isPositionRelativeTo) {
 		if (!this.isCentral) {
 
