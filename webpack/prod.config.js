@@ -6,9 +6,7 @@ var csswring = require('csswring')
 
 
 module.exports = {
-	entry: [
-		'./src/index',
-	],
+	entry: './src/index.js',
 
 	output: {
 		filename: 'bundle.js',
@@ -66,7 +64,7 @@ module.exports = {
 			},
 			{
 				test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-				loader: 'file',
+				loader: 'file-loader',
 			},
 			{
 				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
@@ -79,11 +77,11 @@ module.exports = {
 			},
 			{
 				test: /\.png$/,
-				loader: 'file?name=[name].[ext]',
+				loader: 'file-loader?name=[name].[ext]',
 			},
 			{
 				test: /\.jpg$/,
-				loader: 'file?name=[name].[ext]',
+				loader: 'file-loader?name=[name].[ext]',
 			},
 			{
 				test: /\.scss$/,
